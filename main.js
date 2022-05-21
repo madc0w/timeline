@@ -151,7 +151,7 @@ function setAgeValue() {
 
 function drawTimeline() {
 	const canvas = document.getElementById('timeline');
-	canvas.height = 400;
+	canvas.height = 240;
 	canvas.width = innerWidth;
 	// console.log('width', canvas.width);
 	const ctx = canvas.getContext('2d');

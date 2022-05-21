@@ -141,11 +141,29 @@ function drawTimeline() {
 		ctx.fillText(year, x, canvas.height / 2 + 20);
 	}
 
-	ctx.fillStyle = '#22f';
+	const yOffsets = [-16, 8, -36, 28, -56, 48];
+	let i = 0;
 	for (const timelineBar of timelineBars) {
-		const x = canvas.width * timelineBar.pos - 8;
-		const width =
-			(canvas.width * timelineBar.lifespan) / (maxYear - minYear);
-		ctx.fillRect(x, canvas.height / 2 - 40, width, 10);
+		const yOffset = yOffsets[i++];
+		{
+			ctx.fillStyle = '#99e3fc';
+			const x =
+				(canvas.width * (timelineBar.data.born - minYear)) /
+					(maxYear - minYear) -
+				8;
+			const width =
+				(canvas.width *
+					(timelineBar.data.died - timelineBar.data.born) -
+					minYear) /
+				(maxYear - minYear);
+			ctx.fillRect(x, canvas.height / 2 + yOffset - 3, width, 16);
+		}
+		{
+			ctx.fillStyle = '#22f';
+			const x = canvas.width * timelineBar.pos - 8;
+			const width =
+				(canvas.width * timelineBar.lifespan) / (maxYear - minYear);
+			ctx.fillRect(x, canvas.height / 2 + yOffset, width, 10);
+		}
 	}
 }

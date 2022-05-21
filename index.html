@@ -16,19 +16,26 @@
 				<canvas id="timeline"></canvas>
 			</div>
 			<div id="bottom-panel">
-				<div id="data-image-container">
-					<img id="data-image" />
-					<div id="data-container">
-						<div id="data-name"></div>
-						<div id="data-age-container">
-							Lived to be <span id="data-age"></span> years old?
+				<div id="input-panel">
+					<div id="data-image-container">
+						<img id="data-image" />
+						<div id="data-container">
+							<div id="data-name"></div>
+							<div id="data-age-container">
+								Lived to be <span id="data-age"></span> years
+								old?
+							</div>
 						</div>
 					</div>
+					<div id="data-slider-container">
+						<input id="data-slider" type="range" />
+						<div id="lifespan-bar" />
+					</div>
 				</div>
-				<div id="data-slider-container">
-					<input id="data-slider" type="range" />
-					<div id="lifespan-bar" />
-				</div>
+			</div>
+			<div id="score-panel">
+				<div id="score-label">Score</div>
+				<div id="score-value">0</div>
 			</div>
 		</div>
 	</body>

@@ -44,10 +44,13 @@ function onLoad() {
 						pos:
 							parseInt(getComputedStyle(lifespanBar).left) /
 							innerWidth,
-						lifespan: document.getElementById('data-slider').value,
+						lifespan: parseInt(
+							document.getElementById('data-slider').value
+						),
 						data: selectedData,
 					});
-					isDropOnTimeline = true;
+					setScore();
+					setData();
 					break;
 				}
 			}
@@ -77,14 +80,24 @@ function onResize() {
 	const lifespanBar = document.getElementById('lifespan-bar');
 	initLifespanBarPos.x = getComputedStyle(lifespanBar).left;
 	initLifespanBarPos.y = getComputedStyle(lifespanBar).top;
+
+	document.getElementById('score-panel').style.left = `${innerWidth - 120}px`;
 }
 
 function setData() {
-	selectedData = data[Math.floor(Math.random() * data.length)];
-	document.getElementById('data-image').src = `img/${selectedData.img}`;
-	document.getElementById('data-slider').value = defaultAge;
-	setAgeValue();
-	document.getElementById('data-name').innerHTML = selectedData.name;
+	if (timelineBars.length >= data.length) {
+		document.getElementById('input-panel').innerHTML =
+			'<div id="game-over">GAME OVER</div>';
+	} else {
+		do {
+			selectedData = data[Math.floor(Math.random() * data.length)];
+		} while (timelineBars.find((t) => t.data.name == selectedData.name));
+
+		document.getElementById('data-image').src = `img/${selectedData.img}`;
+		document.getElementById('data-slider').value = defaultAge;
+		setAgeValue();
+		document.getElementById('data-name').innerHTML = selectedData.name;
+	}
 }
 
 function setAgeValue() {
@@ -141,7 +154,11 @@ function drawTimeline() {
 		ctx.fillText(year, x, canvas.height / 2 + 20);
 	}
 
-	const yOffsets = [-16, 8, -36, 28, -56, 48];
+	const yOffsets = [-16, 8];
+	for (let j = 0; j <= data.length / 2; j++) {
+		yOffsets.push(yOffsets[yOffsets.length - 2] - 20);
+		yOffsets.push(yOffsets[yOffsets.length - 2] + 20);
+	}
 	let i = 0;
 	for (const timelineBar of timelineBars) {
 		const yOffset = yOffsets[i++];
@@ -150,7 +167,7 @@ function drawTimeline() {
 			const x =
 				(canvas.width * (timelineBar.data.born - minYear)) /
 					(maxYear - minYear) -
-				8;
+				4;
 			const width =
 				(canvas.width *
 					(timelineBar.data.died - timelineBar.data.born) -
@@ -160,10 +177,52 @@ function drawTimeline() {
 		}
 		{
 			ctx.fillStyle = '#22f';
-			const x = canvas.width * timelineBar.pos - 8;
+			const x = canvas.width * timelineBar.pos - 4;
 			const width =
 				(canvas.width * timelineBar.lifespan) / (maxYear - minYear);
 			ctx.fillRect(x, canvas.height / 2 + yOffset, width, 10);
 		}
 	}
+}
+
+function setScore() {
+	let score = 0;
+	for (const timelineBar of timelineBars) {
+		const setBorn = minYear + timelineBar.pos * (maxYear - minYear);
+		const setDied = setBorn + timelineBar.lifespan;
+		// console.log(' timelineBar', timelineBar);
+		// console.log('set ', setBorn, setDied);
+		if (
+			setBorn < timelineBar.data.died &&
+			setDied > timelineBar.data.born
+		) {
+			let overlap;
+			if (setBorn < timelineBar.data.born) {
+				if (setDied > timelineBar.data.died) {
+					overlap =
+						(timelineBar.data.died - timelineBar.data.born) /
+						(setDied - setBorn);
+				} else {
+					overlap =
+						(setDied - timelineBar.data.born) /
+						(timelineBar.data.died - setBorn);
+				}
+			} else {
+				if (setDied > timelineBar.data.died) {
+					overlap =
+						(timelineBar.data.died - setBorn) /
+						(setDied - timelineBar.data.born);
+				} else {
+					overlap =
+						(setDied - setBorn) /
+						(timelineBar.data.died - timelineBar.data.born);
+				}
+			}
+
+			// console.log(`overlap ${timelineBar.data.name}`, overlap);
+			score += overlap;
+		}
+	}
+	// score /= timelineBars.length;
+	document.getElementById('score-value').innerHTML = (score * 100).toFixed(0);
 }

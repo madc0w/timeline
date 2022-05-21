@@ -25,3 +25,28 @@ body {
 	cursor: grab;
 	margin-left: 4px;
 }
+
+#score-panel {
+	position: absolute;
+	top: 180px;
+	text-align: center;
+	background-color: #99e3fc;
+	height: 60px;
+	width: 80px;
+	padding: 8px;
+	border-radius: 12px;
+}
+
+#score-label {
+	font-weight: bold;
+}
+
+#score-value {
+	font-size: 32px;
+}
+
+#game-over {
+	font-size: 36px;
+	text-align: center;
+	margin-top: 40px;
+}

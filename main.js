@@ -190,7 +190,7 @@ function drawTimeline() {
 		ctx.fillText(year, x, canvas.height / 2 + 20);
 	}
 
-	const yOffsets = [-16, 8];
+	const yOffsets = [-16, 28];
 	for (let j = 0; j <= data.length / 2; j++) {
 		yOffsets.push(yOffsets[yOffsets.length - 2] - 20);
 		yOffsets.push(yOffsets[yOffsets.length - 2] + 20);

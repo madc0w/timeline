@@ -67,6 +67,7 @@ function onLoad() {
 		}
 	});
 	onResize();
+	document.getElementById('hi-score-value').innerHTML = hiScore().toFixed(0);
 }
 
 function onResize() {
@@ -117,6 +118,7 @@ function setAgeValue() {
 
 function drawTimeline() {
 	const canvas = document.getElementById('timeline');
+	canvas.height = 400;
 	canvas.width = innerWidth;
 	// console.log('width', canvas.width);
 	const ctx = canvas.getContext('2d');
@@ -163,7 +165,7 @@ function drawTimeline() {
 	for (const timelineBar of timelineBars) {
 		const yOffset = yOffsets[i++];
 		{
-			ctx.fillStyle = '#99e3fc';
+			ctx.fillStyle = '#222';
 			const x =
 				(canvas.width * (timelineBar.data.born - minYear)) /
 					(maxYear - minYear) -
@@ -189,7 +191,15 @@ function drawTimeline() {
 				4;
 			ctx.fillStyle = '#fff';
 			ctx.font = '14px Lato';
-			ctx.fillText(timelineBar.data.name, textX + 4, y + 10);
+
+			// Use a span to render html entities
+			const textContainer = document.createElement('span');
+			textContainer.innerHTML = timelineBar.data.name;
+			ctx.fillText(
+				`${textContainer.textContent} (${timelineBar.data.born} - ${timelineBar.data.died})`,
+				textX + 4,
+				y + 10
+			);
 		}
 	}
 }
@@ -233,5 +243,15 @@ function setScore() {
 		}
 	}
 	// score /= timelineBars.length;
-	document.getElementById('score-value').innerHTML = (score * 100).toFixed(0);
+	score *= 100;
+
+	if (score > hiScore()) {
+		localStorage.hiScore = score;
+	}
+	document.getElementById('score-value').innerHTML = score.toFixed(0);
+	document.getElementById('hi-score-value').innerHTML = hiScore().toFixed(0);
+}
+
+function hiScore() {
+	return localStorage.hiScore == null ? 0 : parseFloat(localStorage.hiScore);
 }

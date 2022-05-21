@@ -12,9 +12,18 @@ body {
 	vertical-align: top;
 }
 
+#bottom-panel {
+	margin-top: 18px;
+}
+
 #data-container {
 	vertical-align: top;
 	display: inline-block;
+	margin-left: 8px;
+}
+
+#data-name {
+	font-weight: bold;
 }
 
 #lifespan-bar {
@@ -30,13 +39,16 @@ body {
 
 #score-panel {
 	position: absolute;
-	top: 180px;
+	top: 420px;
 	text-align: center;
 	background-color: #99e3fc;
-	height: 60px;
+	height: 110px;
 	width: 80px;
 	padding: 8px;
 	border-radius: 12px;
+	border-color: black;
+	border-width: 3px;
+	border-style: solid;
 }
 
 #score-label {
@@ -45,6 +57,10 @@ body {
 
 #score-value {
 	font-size: 32px;
+}
+
+#hi-score-value {
+	font-size: 22px;
 }
 
 #game-over {

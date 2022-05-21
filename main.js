@@ -4,12 +4,12 @@ const defaultAge = 60;
 const maxAge = 100;
 const minAge = 10;
 
-const timelineBars = [];
-const initLifespanBarPos = {};
-
-let offset, selectedData;
+let timelineBars = [];
+let initLifespanBarPos = {};
+let offset, selectedData, selectedCategory;
 
 function onLoad() {
+	selectedCategory = new URL(location.href).searchParams.get('category');
 	setData();
 
 	document.getElementById('data-slider').setAttribute('min', minAge);
@@ -68,6 +68,35 @@ function onLoad() {
 	});
 	onResize();
 	document.getElementById('hi-score-value').innerHTML = hiScore().toFixed(0);
+
+	const categories = [];
+	for (const d of data) {
+		if (!categories.includes(d.category)) {
+			categories.push(d.category);
+		}
+	}
+	categories.sort();
+	categories.unshift('all');
+	const categorySelect = document.getElementById('category-select');
+	for (const c of categories) {
+		categorySelect.options[categorySelect.options.length] = new Option(
+			c[0].toUpperCase() + c.substring(1),
+			c
+		);
+	}
+
+	if (selectedCategory && selectedCategory != 'all') {
+		for (let i = 0; i < categorySelect.options.length; i++) {
+			// categorySelect.options[i].defaultSelected =
+			// console.log(
+			// 	'categorySelect.options[i].value',
+			// 	categorySelect.options[i].value
+			// );
+			if (categorySelect.options[i].value == selectedCategory) {
+				categorySelect.options[i].selected = true;
+			}
+		}
+	}
 }
 
 function onResize() {
@@ -86,12 +115,16 @@ function onResize() {
 }
 
 function setData() {
-	if (timelineBars.length >= data.length) {
+	const filteredData = data.filter(
+		(d) => !selectedCategory || d.category == selectedCategory
+	);
+	if (timelineBars.length >= filteredData.length) {
 		document.getElementById('input-panel').innerHTML =
-			'<div id="game-over">GAME OVER</div>';
+			'<div id="game-over">GAME OVER<div id="play-again" onClick="reset()">Play Again</div></div>';
 	} else {
 		do {
-			selectedData = data[Math.floor(Math.random() * data.length)];
+			selectedData =
+				filteredData[Math.floor(Math.random() * filteredData.length)];
 		} while (timelineBars.find((t) => t.data.name == selectedData.name));
 
 		document.getElementById('data-image').src = `img/${selectedData.img}`;
@@ -246,12 +279,29 @@ function setScore() {
 	score *= 100;
 
 	if (score > hiScore()) {
-		localStorage.hiScore = score;
+		localStorage[`hiScore-${selectedCategory || 'all'}`] = score;
 	}
 	document.getElementById('score-value').innerHTML = score.toFixed(0);
 	document.getElementById('hi-score-value').innerHTML = hiScore().toFixed(0);
 }
 
 function hiScore() {
-	return localStorage.hiScore == null ? 0 : parseFloat(localStorage.hiScore);
+	const s = localStorage[`hiScore-${selectedCategory || 'all'}`];
+	return s == null ? 0 : parseFloat(s);
+}
+
+function reset() {
+	location.href = location.href;
+}
+
+function setCategory() {
+	const category = document.getElementById('category-select').value;
+	// console.log(category);
+	const url = new URL(location.href);
+	if (category == 'all') {
+		url.searchParams.delete('category');
+	} else {
+		url.searchParams.set('category', category);
+	}
+	location.href = url.toString();
 }

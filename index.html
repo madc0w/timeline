@@ -11,6 +11,10 @@
 		/>
 	</head>
 	<body onLoad="onLoad()" onResize="onResize()">
+		<div id="header-container">
+			<label for="category-select">Cateogry:</label>
+			<select id="category-select" onChange="setCategory()"></select>
+		</div>
 		<div id="game-container">
 			<div id="top-panel">
 				<canvas id="timeline"></canvas>

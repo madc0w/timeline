@@ -28,7 +28,7 @@ body {
 
 #lifespan-bar {
 	position: absolute;
-	height: 20px;
+	height: 40px;
 	background-color: #22f;
 	border-radius: 4px;
 	cursor: grab;
@@ -39,7 +39,7 @@ body {
 
 #score-panel {
 	position: absolute;
-	top: 420px;
+	top: 480px;
 	text-align: center;
 	background-color: #99e3fc;
 	height: 110px;
@@ -67,4 +67,17 @@ body {
 	font-size: 36px;
 	text-align: center;
 	margin-top: 40px;
+}
+
+#play-again {
+	cursor: pointer;
+	font-size: 24px;
+}
+
+#category-select {
+	width: 200px;
+}
+
+#header-container {
+	margin-bottom: 18px;
 }

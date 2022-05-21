@@ -5,6 +5,7 @@ const maxAge = 100;
 const minAge = 10;
 
 const timelineBars = [];
+const initLifespanBarPos = {};
 
 let offset, selectedData;
 
@@ -39,19 +40,26 @@ function onLoad() {
 
 			for (const el of document.elementsFromPoint(e.clientX, e.clientY)) {
 				if (el.id == 'timeline') {
-					timelineBars.push(selectedData);
+					timelineBars.push({
+						pos:
+							parseInt(getComputedStyle(lifespanBar).left) /
+							innerWidth,
+						lifespan: document.getElementById('data-slider').value,
+						data: selectedData,
+					});
+					isDropOnTimeline = true;
+					break;
 				}
 			}
+			drawTimeline();
+			lifespanBar.style.left = initLifespanBarPos.x;
+			lifespanBar.style.top = initLifespanBarPos.y;
 		}
-	});
-	document.addEventListener('mousedrag', (e) => {
-		console.log('mousedrag');
-		offset = null;
 	});
 	document.addEventListener('mousemove', (e) => {
 		if (offset) {
-			lifespanBar.style.top = `${e.clientY - offset.top}px`;
 			lifespanBar.style.left = `${e.clientX - offset.left}px`;
+			lifespanBar.style.top = `${e.clientY - offset.top}px`;
 			// console.log(lifespanBar.style.top);
 		}
 	});
@@ -65,8 +73,10 @@ function onResize() {
 	// document.getElementById('lifespan-bar').style.width = width;
 	document.getElementById('data-slider').style.width = width;
 	setAgeValue();
-
 	drawTimeline();
+	const lifespanBar = document.getElementById('lifespan-bar');
+	initLifespanBarPos.x = getComputedStyle(lifespanBar).left;
+	initLifespanBarPos.y = getComputedStyle(lifespanBar).top;
 }
 
 function setData() {
@@ -131,6 +141,11 @@ function drawTimeline() {
 		ctx.fillText(year, x, canvas.height / 2 + 20);
 	}
 
+	ctx.fillStyle = '#22f';
 	for (const timelineBar of timelineBars) {
+		const x = canvas.width * timelineBar.pos - 8;
+		const width =
+			(canvas.width * timelineBar.lifespan) / (maxYear - minYear);
+		ctx.fillRect(x, canvas.height / 2 - 40, width, 10);
 	}
 }

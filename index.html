@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Timeline</title>
+		<script type="text/javascript" src="data.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link
+			href="https://fonts.googleapis.com/css?family=Lato"
+			rel="stylesheet"
+		/>
+	</head>
+	<body onLoad="onLoad()" onResize="onResize()">
+		<div id="game-container">
+			<div id="top-panel">
+				<canvas id="timeline"></canvas>
+			</div>
+			<div id="bottom-panel">
+				<div id="data-image-container">
+					<img id="data-image" />
+					<div id="data-container">
+						<div id="data-name"></div>
+						<div id="data-age-container">
+							Lived to be <span id="data-age"></span> years old
+						</div>
+					</div>
+				</div>
+				<div id="data-slider-container">
+					<input id="data-slider" type="range" />
+					<div id="lifespan-input" />
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

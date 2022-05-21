@@ -1,0 +1,30 @@
+body {
+	font-family: Lato;
+}
+
+#data-image {
+	height: 80px;
+	width: 80px;
+	border-radius: 8px;
+}
+
+#data-slider-container {
+	vertical-align: top;
+}
+
+#data-slider {
+	width: 100%;
+}
+
+#data-container {
+	vertical-align: top;
+	display: inline-block;
+}
+
+#lifespan-input {
+	height: 20px;
+	background-color: #22f;
+}
+
+#timeline {
+}

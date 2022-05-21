@@ -3,6 +3,7 @@ const maxYear = 2020;
 const defaultAge = 60;
 const maxAge = 100;
 const minAge = 10;
+const maxGameLength = 8;
 
 let timelineBars = [];
 let initLifespanBarPos = {};
@@ -118,7 +119,7 @@ function setData() {
 	const filteredData = data.filter(
 		(d) => !selectedCategory || d.category == selectedCategory
 	);
-	if (timelineBars.length >= filteredData.length) {
+	if (timelineBars.length >= Math.min(filteredData.length, maxGameLength)) {
 		document.getElementById('input-panel').innerHTML =
 			'<div id="game-over">GAME OVER<div id="play-again" onClick="reset()">Play Again</div></div>';
 	} else {

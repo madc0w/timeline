@@ -24,6 +24,8 @@ body {
 	border-radius: 4px;
 	cursor: grab;
 	margin-left: 4px;
+	text-align: center;
+	color: white;
 }
 
 #score-panel {

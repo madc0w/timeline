@@ -48,13 +48,13 @@ const data = [
 		img: 'Nikola Tesla.jpeg',
 		category: 'science',
 	},
-
-	// {
-	// 	name: '',
-	// 	born: 0,
-	// 	died: 0,
-	// 	img: '',
-	// },
+	{
+		name: 'Igor Stravinsky',
+		born: 1882,
+		died: 1971,
+		img: 'Igor_Stravinsky.jpg',
+		category: 'entertainment',
+	},
 	// {
 	// 	name: '',
 	// 	born: 0,

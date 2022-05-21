@@ -4,6 +4,8 @@ const defaultAge = 60;
 const maxAge = 100;
 const minAge = 10;
 
+let offset;
+
 function onLoad() {
 	setData();
 
@@ -12,16 +14,50 @@ function onLoad() {
 	document
 		.getElementById('data-slider')
 		.addEventListener('input', setAgeValue);
+
+	const lifespanBar = document.getElementById('lifespan-bar');
+
+	lifespanBar.style.zIndex = 1000;
+	lifespanBar.ondragstart = () => {
+		return false;
+	};
+	lifespanBar.addEventListener('mousedown', (e) => {
+		// console.log('mousedown');
+		const top = parseInt(getComputedStyle(lifespanBar).top);
+		const left = parseInt(getComputedStyle(lifespanBar).left);
+		offset = {
+			top: e.clientY - top,
+			left: e.clientX - left,
+		};
+	});
+	document.addEventListener('mouseup', (e) => {
+		// console.log('mouseup');
+		if (offset) {
+			offset = null;
+		}
+	});
+	document.addEventListener('mousedrag', (e) => {
+		console.log('mousedrag');
+		offset = null;
+	});
+	document.addEventListener('mousemove', (e) => {
+		if (offset) {
+			lifespanBar.style.top = `${e.clientY - offset.top}px`;
+			lifespanBar.style.left = `${e.clientX - offset.left}px`;
+			// console.log(lifespanBar.style.top);
+		}
+	});
 	onResize();
 }
 
 function onResize() {
-	const width = parseInt(
+	const timelinWidth = parseInt(
 		getComputedStyle(document.getElementById('timeline')).width
 	);
-	document.getElementById('data-slider-container').style.width = `${
-		(width * maxAge) / (maxYear - minYear)
-	}px`;
+	const width = `${(timelinWidth * maxAge) / (maxYear - minYear)}px`;
+	document.getElementById('data-slider-container').style.width = width;
+	document.getElementById('lifespan-bar').style.width = width;
+
 	drawTimeline();
 }
 
@@ -36,7 +72,7 @@ function setData() {
 function setAgeValue() {
 	const value = document.getElementById('data-slider').value;
 	// console.log(value);
-	document.getElementById('lifespan-input').style.width = `${
+	document.getElementById('lifespan-bar').style.width = `${
 		(value - minAge) / ((maxAge - minAge) / maxAge)
 	}%`;
 	document.getElementById('data-age').innerHTML = value;
@@ -58,17 +94,26 @@ function drawTimeline() {
 	ctx.lineTo(canvas.width, canvas.height / 2);
 	ctx.stroke();
 
-	ctx.lineWidth = 1;
 	ctx.font = '12px Lato';
-	ctx.fillStyle = '#000';
 	for (let year = minYear; year <= maxYear; year += 50) {
+		const x = (canvas.width * (year - minYear)) / (maxYear - minYear);
+		ctx.lineWidth = 3;
+		ctx.strokeStyle = '#ddd';
 		ctx.beginPath();
 		// console.log((year - minYear) / (maxYear - minYear));
-		const x = (canvas.width * (year - minYear)) / (maxYear - minYear);
+		ctx.moveTo(x, 0);
+		ctx.lineTo(x, canvas.height);
+		ctx.stroke();
+
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = '#000';
+		ctx.beginPath();
+		// console.log((year - minYear) / (maxYear - minYear));
 		ctx.moveTo(x, canvas.height / 2 - 10);
 		ctx.lineTo(x, canvas.height / 2 + 10);
 		ctx.stroke();
 
+		ctx.fillStyle = '#000';
 		ctx.fillText(year, x, canvas.height / 2 + 20);
 	}
 }

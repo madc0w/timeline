@@ -21,10 +21,10 @@ body {
 	display: inline-block;
 }
 
-#lifespan-input {
+#lifespan-bar {
+	position: absolute;
 	height: 20px;
 	background-color: #22f;
-}
-
-#timeline {
+	border-radius: 4px;
+	cursor: grab;
 }

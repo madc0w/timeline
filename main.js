@@ -132,7 +132,7 @@ function drawTimeline() {
 	ctx.stroke();
 
 	ctx.font = '12px Lato';
-	for (let year = minYear; year <= maxYear; year += 50) {
+	for (let year = minYear; year <= maxYear; year += 20) {
 		const x = (canvas.width * (year - minYear)) / (maxYear - minYear);
 		ctx.lineWidth = 3;
 		ctx.strokeStyle = '#ddd';
@@ -178,9 +178,18 @@ function drawTimeline() {
 		{
 			ctx.fillStyle = '#22f';
 			const x = canvas.width * timelineBar.pos - 4;
+			const y = canvas.height / 2 + yOffset;
 			const width =
 				(canvas.width * timelineBar.lifespan) / (maxYear - minYear);
-			ctx.fillRect(x, canvas.height / 2 + yOffset, width, 10);
+			ctx.fillRect(x, y, width, 10);
+
+			const textX =
+				(canvas.width * (timelineBar.data.born - minYear)) /
+					(maxYear - minYear) -
+				4;
+			ctx.fillStyle = '#fff';
+			ctx.font = '14px Lato';
+			ctx.fillText(timelineBar.data.name, textX + 4, y + 10);
 		}
 	}
 }

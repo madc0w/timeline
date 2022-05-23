@@ -186,8 +186,11 @@ function drawTimeline() {
 		ctx.lineTo(x, canvas.height / 2 + 10);
 		ctx.stroke();
 
+		ctx.fillStyle = '#fff';
+		ctx.fillRect(x - 14, canvas.height / 2 + 12, 30, 12);
+
 		ctx.fillStyle = '#000';
-		ctx.fillText(year, x, canvas.height / 2 + 20);
+		ctx.fillText(year, x - 14, canvas.height / 2 + 22);
 	}
 
 	const yOffsets = [-16, 28];

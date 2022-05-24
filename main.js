@@ -103,14 +103,25 @@ function onLoad() {
 function onResize() {
 	const width = `${(innerWidth * maxAge) / (maxYear - minYear)}px`;
 	// console.log('width', width);
-	document.getElementById('data-slider-container').style.width = width;
+	const dataSliderContainer = document.getElementById(
+		'data-slider-container'
+	);
+	if (dataSliderContainer) {
+		dataSliderContainer.style.width = width;
+	}
 	// document.getElementById('lifespan-bar').style.width = width;
-	document.getElementById('data-slider').style.width = width;
+	const dataSlider = document.getElementById('data-slider');
+	if (dataSlider) {
+		dataSlider.style.width = width;
+	}
+
 	setAgeValue();
 	drawTimeline();
 	const lifespanBar = document.getElementById('lifespan-bar');
-	initLifespanBarPos.x = getComputedStyle(lifespanBar).left;
-	initLifespanBarPos.y = getComputedStyle(lifespanBar).top;
+	if (lifespanBar) {
+		initLifespanBarPos.x = getComputedStyle(lifespanBar).left;
+		initLifespanBarPos.y = getComputedStyle(lifespanBar).top;
+	}
 
 	document.getElementById('score-panel').style.left = `${innerWidth - 120}px`;
 }
@@ -136,18 +147,20 @@ function setData() {
 }
 
 function setAgeValue() {
-	const value = document.getElementById('data-slider').value;
-	// console.log(value);
-	const width = (innerWidth * maxAge) / (maxYear - minYear);
-	document.getElementById('lifespan-bar').style.width = `${
-		(width * (value - minAge)) / (maxAge - minAge)
-	}px`;
-	// console.log('width', width);
-	// console.log(
-	// 	'(value - minAge)) / ((maxAge - minAge) / maxAge)',
-	// 	(value - minAge) / (maxAge - minAge)
-	// );
-	document.getElementById('data-age').innerHTML = value;
+	const dataSlider = document.getElementById('data-slider');
+	if (dataSlider) {
+		const value = dataSlider.value;
+		// console.log(value);
+		// const canvas = document.getElementById('timeline');
+		const width = (innerWidth * value) / (maxYear - minYear);
+		document.getElementById('lifespan-bar').style.width = `${width}px`;
+		// console.log('width', width);
+		// console.log(
+		// 	'(value - minAge)) / ((maxAge - minAge) / maxAge)',
+		// 	(value - minAge) / (maxAge - minAge)
+		// );
+		document.getElementById('data-age').innerHTML = value;
+	}
 }
 
 function drawTimeline() {
@@ -205,13 +218,13 @@ function drawTimeline() {
 			ctx.fillStyle = '#222';
 			const x =
 				(canvas.width * (timelineBar.data.born - minYear)) /
-					(maxYear - minYear) -
-				4;
+				(maxYear - minYear);
 			const width =
 				(canvas.width *
 					(timelineBar.data.died - timelineBar.data.born) -
 					minYear) /
-				(maxYear - minYear);
+					(maxYear - minYear) +
+				4;
 			ctx.fillRect(x, canvas.height / 2 + yOffset - 3, width, 16);
 		}
 		{

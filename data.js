@@ -475,4 +475,18 @@ const data = [
 		img: 'Thomas_Edison.jpg',
 		category: 'science',
 	},
+	{
+		name: 'Winston Churchill',
+		born: 1874,
+		died: 1965,
+		img: 'Winston Churchill.jpg',
+		category: 'politics',
+	},
+	{
+		name: '&Eacute;variste Galois',
+		born: 1811,
+		died: 1832,
+		img: 'Evariste_galois.jpg',
+		category: 'science',
+	},
 ];

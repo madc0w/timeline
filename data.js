@@ -489,4 +489,25 @@ const data = [
 		img: 'Evariste_galois.jpg',
 		category: 'science',
 	},
+	{
+		name: 'Charles Darwin',
+		born: 1809,
+		died: 1882,
+		img: 'Charles Darwin.jpg',
+		category: 'science',
+	},
+	{
+		name: 'Gary Cooper',
+		born: 1901,
+		died: 1961,
+		img: 'Gary_Cooper.jpg',
+		category: 'arts',
+	},
+	{
+		name: 'John Lennon',
+		born: 1940,
+		died: 1980,
+		img: 'John Lennon.jpg',
+		category: 'arts',
+	},
 ];

@@ -461,4 +461,18 @@ const data = [
 		img: 'Ulysses_S._Grant.jpg',
 		category: 'politics',
 	},
+	{
+		name: 'John von Neumann',
+		born: 1903,
+		died: 1957,
+		img: 'JohnvonNeumann.jpg',
+		category: 'science',
+	},
+	{
+		name: 'Thomas Edison',
+		born: 1847,
+		died: 1931,
+		img: 'Thomas_Edison.jpg',
+		category: 'science',
+	},
 ];

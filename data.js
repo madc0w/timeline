@@ -531,4 +531,25 @@ const data = [
 		img: 'Neil_Armstrong.jpg',
 		category: 'explorers',
 	},
+	{
+		name: 'Sir Ernest Henry Shackleton',
+		born: 1874,
+		died: 1922,
+		img: 'Ernest_Shackleton.jpg',
+		category: 'explorers',
+	},
+	{
+		name: 'Marilyn Monroe',
+		born: 1926,
+		died: 1962,
+		img: 'Marilyn-Monroe.jpg',
+		category: 'arts',
+	},
+	{
+		name: 'Sarah Bernhardt',
+		born: 1844,
+		died: 1923,
+		img: 'Sarah_Bernhardt.jpg',
+		category: 'arts',
+	},
 ];

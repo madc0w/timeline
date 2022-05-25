@@ -524,4 +524,11 @@ const data = [
 		img: 'Georges_Clemenceau.jpg',
 		category: 'politics',
 	},
+	{
+		name: 'Neil Armstrong',
+		born: 1930,
+		died: 2012,
+		img: 'Neil_Armstrong.jpg',
+		category: 'explorers',
+	},
 ];

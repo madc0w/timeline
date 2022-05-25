@@ -182,7 +182,7 @@ function drawTimeline() {
 
 	ctx.font = '12px Lato';
 	for (let year = minYear; year <= maxYear; year += 20) {
-		const x = (canvas.width * (year - minYear)) / (maxYear - minYear);
+		let x = (canvas.width * (year - minYear)) / (maxYear - minYear);
 		ctx.lineWidth = 3;
 		ctx.strokeStyle = '#ddd';
 		ctx.beginPath();
@@ -199,6 +199,11 @@ function drawTimeline() {
 		ctx.lineTo(x, canvas.height / 2 + 10);
 		ctx.stroke();
 
+		if (year == minYear) {
+			x += 14;
+		} else if (year == maxYear) {
+			x -= 24;
+		}
 		ctx.fillStyle = '#fff';
 		ctx.fillRect(x - 14, canvas.height / 2 + 12, 30, 12);
 

@@ -81,7 +81,7 @@ const data = [
 		born: 1883,
 		died: 1924,
 		img: 'Franz_Kafka.jpg',
-		category: 'writers',
+		category: 'arts',
 	},
 	{
 		name: 'Amelia Earhart',
@@ -509,5 +509,19 @@ const data = [
 		died: 1980,
 		img: 'John Lennon.jpg',
 		category: 'arts',
+	},
+	{
+		name: 'Woodrow Wilson',
+		born: 1856,
+		died: 1924,
+		img: 'Woodrow_Wilson.jpg',
+		category: 'politics',
+	},
+	{
+		name: 'Georges Clemenceau',
+		born: 1841,
+		died: 1929,
+		img: 'Georges_Clemenceau.jpg',
+		category: 'politics',
 	},
 ];

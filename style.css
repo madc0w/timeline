@@ -80,4 +80,7 @@ body {
 
 #header-container {
 	margin-bottom: 18px;
+	background-color: #99e3fc;
+	padding: 4px;
+	text-align: center;
 }

@@ -650,4 +650,32 @@ const data = [
 		img: 'Michael_Faraday.jpg',
 		category: 'science',
 	},
+	{
+		name: 'Salvador Dal&iacute;',
+		born: 1904,
+		died: 1989,
+		img: 'Salvador Dali.jpg',
+		category: 'arts',
+	},
+	{
+		name: 'Nathaniel Hawthorne',
+		born: 1804,
+		died: 1864,
+		img: 'Nathaniel_Hawthorne.jpg',
+		category: 'arts',
+	},
+	{
+		name: 'Leo Tolstoy',
+		born: 1828,
+		died: 1910,
+		img: 'Leo Tolstoy.jpg',
+		category: 'arts',
+	},
+	{
+		name: 'Fyodor Dostoevsky',
+		born: 1821,
+		died: 1881,
+		img: 'Fyodor Dostoevsky.jpg',
+		category: 'arts',
+	},
 ];

@@ -678,4 +678,11 @@ const data = [
 		img: 'Fyodor Dostoevsky.jpg',
 		category: 'arts',
 	},
+	{
+		name: 'Chiang Kai-shek',
+		born: 1887,
+		died: 1975,
+		img: 'Chiang_Kai-shek.jpg',
+		category: 'politics',
+	},
 ];

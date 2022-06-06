@@ -39,6 +39,7 @@ function onLoad() {
 		if (offset) {
 			offset = null;
 
+			let isTimelineDrop;
 			for (const el of document.elementsFromPoint(e.clientX, e.clientY)) {
 				if (el.id == 'timeline') {
 					timelineBars.push({
@@ -52,12 +53,20 @@ function onLoad() {
 					});
 					setScore();
 					setData();
+					isTimelineDrop = true;
 					break;
 				}
 			}
 			drawTimeline();
-			lifespanBar.style.left = initLifespanBarPos.x;
-			lifespanBar.style.top = initLifespanBarPos.y;
+			if (isTimelineDrop) {
+				lifespanBar.style.left = initLifespanBarPos.x;
+				lifespanBar.style.top = initLifespanBarPos.y;
+			} else {
+				$('#lifespan-bar').animate({
+					left: initLifespanBarPos.x,
+					top: initLifespanBarPos.y,
+				});
+			}
 		}
 	});
 	document.addEventListener('mousemove', (e) => {
@@ -261,16 +270,17 @@ function drawTimeline() {
 
 function setScore() {
 	let score = 0;
+	let i = 0;
 	for (const timelineBar of timelineBars) {
 		const setBorn = minYear + timelineBar.pos * (maxYear - minYear);
 		const setDied = setBorn + timelineBar.lifespan;
 		// console.log(' timelineBar', timelineBar);
 		// console.log('set ', setBorn, setDied);
+		let overlap = 0;
 		if (
 			setBorn < timelineBar.data.died &&
 			setDied > timelineBar.data.born
 		) {
-			let overlap;
 			if (setBorn < timelineBar.data.born) {
 				if (setDied > timelineBar.data.died) {
 					overlap =
@@ -295,6 +305,34 @@ function setScore() {
 
 			// console.log(`overlap ${timelineBar.data.name}`, overlap);
 			score += overlap;
+		}
+		i++;
+		if (i == timelineBars.length) {
+			let html = '<div id="score-feedback-text">';
+			if (overlap == 0) {
+				html += 'No points for you!';
+			} else if (overlap < 0.2) {
+				html += 'Meh. Do better.';
+			} else if (overlap < 0.6) {
+				html += 'Pretty close...';
+			} else if (overlap < 0.8) {
+				html += 'Very nice!';
+			} else {
+				html += "Damn, you're good!";
+			}
+			html += '</div>';
+			if (overlap > 0) {
+				html += `<div id="score-increment">+ ${Math.round(
+					overlap * 100
+				)}</div>`;
+			}
+			const scoreFeedbackModal = $('#score-feedback-modal');
+			scoreFeedbackModal.html(html);
+			scoreFeedbackModal.removeClass('hidden');
+			scoreFeedbackModal.fadeIn();
+			setTimeout(() => {
+				scoreFeedbackModal.fadeOut();
+			}, 2000);
 		}
 	}
 	// score /= timelineBars.length;

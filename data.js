@@ -220,7 +220,7 @@ const data = [
 		name: 'Tennessee Williams',
 		born: 1911,
 		died: 1983,
-		img: 'Tennessee_Williams.jpgs',
+		img: 'Tennessee_Williams.jpg',
 		category: 'arts',
 	},
 	{

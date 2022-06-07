@@ -208,6 +208,18 @@ function drawTimeline() {
 		ctx.lineTo(x, canvas.height / 2 + 10);
 		ctx.stroke();
 
+		if (canvas.width > 800) {
+			const x2 =
+				(canvas.width * (year + 10 - minYear)) / (maxYear - minYear);
+			ctx.lineWidth = 1;
+			ctx.strokeStyle = '#000';
+			ctx.beginPath();
+			// console.log((year - minYear) / (maxYear - minYear));
+			ctx.moveTo(x2, canvas.height / 2 - 6);
+			ctx.lineTo(x2, canvas.height / 2 + 6);
+			ctx.stroke();
+		}
+
 		if (year == minYear) {
 			x += 14;
 		} else if (year == maxYear) {
@@ -365,3 +377,35 @@ function setCategory() {
 	}
 	location.href = url.toString();
 }
+
+// async function makeSPARQLQuery(endpointUrl, sparqlQuery) {
+// 	const settings = {
+// 		headers: { Accept: 'application/sparql-results+json' },
+// 		data: { query: sparqlQuery },
+// 	};
+// 	return await $.ajax(endpointUrl, settings);
+// }
+
+// async function getWikidata() {
+// 	const endpointUrl = 'https://query.wikidata.org/sparql',
+// 		sparqlQuery =
+// 			'#title: Astronauts\n' +
+// 			'select distinct ?item ?itemLabel ?pobLabel ?pobcLabel ?dob ?dod ?itemDescription ?sitelinks where {\n' +
+// 			'    ?item wdt:P31 wd:Q5;  # Any instance of a human.\n' +
+// 			'          wdt:P106 wd:Q11631;   # Occupation astronaut\n' +
+// 			'          wikibase:sitelinks ?sitelinks.\n' +
+// 			'    ?item wdt:P19 ?pob;\n' +
+// 			'          wdt:P27 ?coc;\n' +
+// 			'          wdt:P569 ?dob;\n' +
+// 			'          wdt:P570 ?dod.\n' +
+// 			'    ?pob  wdt:P17  ?pobc.      \n' +
+// 			'  \n' +
+// 			'    SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }\n' +
+// 			'}\n' +
+// 			'ORDER BY ASC(?dob)';
+
+// 	const data = await makeSPARQLQuery(endpointUrl, sparqlQuery);
+// 	console.log(data);
+// }
+
+// getWikidata();

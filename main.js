@@ -83,8 +83,16 @@ function onLoad() {
 	categories.unshift('all');
 	const categorySelect = document.getElementById('category-select');
 	for (const c of categories) {
+		let label = c[0].toUpperCase() + c.substring(1);
+		let n;
+		if (c == 'all') {
+			n = data.length;
+		} else {
+			n = data.filter((d) => d.category == c).length;
+		}
+		label += ` (${n})`;
 		categorySelect.options[categorySelect.options.length] = new Option(
-			c[0].toUpperCase() + c.substring(1),
+			label,
 			c
 		);
 	}
@@ -143,11 +151,12 @@ function setData() {
 		// document.getElementById('data-image').src = `img/${selectedData.img}`;
 		document.getElementById('data-slider').value = defaultAge;
 		setAgeValue();
-		https: document.getElementById('data-name').firstChild.href =
+		document.getElementById('data-name').firstChild.href =
 			selectedData.link ||
 			'https://en.wikipedia.org/wiki/' + selectedData.name.replace(/\s/g, '_');
 		document.getElementById('data-name').firstChild.innerHTML =
 			selectedData.name;
+		document.getElementById('data-category').innerHTML = selectedData.category;
 	}
 }
 

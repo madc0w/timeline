@@ -15,7 +15,7 @@
 	</head>
 	<body onLoad="onLoad()" onResize="onResize()">
 		<div id="header-container">
-			<label for="category-select">Cateogry:</label>
+			<label for="category-select">Category:</label>
 			<select id="category-select" onChange="setCategory()"></select>
 		</div>
 		<div id="game-container">
@@ -28,6 +28,7 @@
 						<!-- <img id="data-image" /> -->
 						<div id="data-container">
 							<div id="data-name"><a target="_blank"></a></div>
+							<div>Category: <span id="data-category"></span></div>
 							<div id="data-age-container">
 								Lived to be <span id="data-age"></span> years old?
 							</div>

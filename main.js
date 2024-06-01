@@ -1,4 +1,4 @@
-const minYear = 1700;
+const minYear = 1200;
 const maxYear = 2020;
 const defaultAge = 60;
 const maxAge = 100;
@@ -15,9 +15,7 @@ function onLoad() {
 
 	document.getElementById('data-slider').setAttribute('min', minAge);
 	document.getElementById('data-slider').setAttribute('max', maxAge);
-	document
-		.getElementById('data-slider')
-		.addEventListener('input', setAgeValue);
+	document.getElementById('data-slider').addEventListener('input', setAgeValue);
 
 	const lifespanBar = document.getElementById('lifespan-bar');
 
@@ -43,12 +41,8 @@ function onLoad() {
 			for (const el of document.elementsFromPoint(e.clientX, e.clientY)) {
 				if (el.id == 'timeline') {
 					timelineBars.push({
-						pos:
-							parseInt(getComputedStyle(lifespanBar).left) /
-							innerWidth,
-						lifespan: parseInt(
-							document.getElementById('data-slider').value
-						),
+						pos: parseInt(getComputedStyle(lifespanBar).left) / innerWidth,
+						lifespan: parseInt(document.getElementById('data-slider').value),
 						data: selectedData,
 					});
 					setScore();
@@ -112,9 +106,7 @@ function onLoad() {
 function onResize() {
 	const width = `${(innerWidth * maxAge) / (maxYear - minYear)}px`;
 	// console.log('width', width);
-	const dataSliderContainer = document.getElementById(
-		'data-slider-container'
-	);
+	const dataSliderContainer = document.getElementById('data-slider-container');
 	if (dataSliderContainer) {
 		dataSliderContainer.style.width = width;
 	}
@@ -148,10 +140,14 @@ function setData() {
 				filteredData[Math.floor(Math.random() * filteredData.length)];
 		} while (timelineBars.find((t) => t.data.name == selectedData.name));
 
-		document.getElementById('data-image').src = `img/${selectedData.img}`;
+		// document.getElementById('data-image').src = `img/${selectedData.img}`;
 		document.getElementById('data-slider').value = defaultAge;
 		setAgeValue();
-		document.getElementById('data-name').innerHTML = selectedData.name;
+		https: document.getElementById('data-name').firstChild.href =
+			selectedData.link ||
+			'https://en.wikipedia.org/wiki/' + selectedData.name.replace(/\s/g, '_');
+		document.getElementById('data-name').firstChild.innerHTML =
+			selectedData.name;
 	}
 }
 
@@ -209,8 +205,7 @@ function drawTimeline() {
 		ctx.stroke();
 
 		if (canvas.width > 800) {
-			const x2 =
-				(canvas.width * (year + 10 - minYear)) / (maxYear - minYear);
+			const x2 = (canvas.width * (year + 10 - minYear)) / (maxYear - minYear);
 			ctx.lineWidth = 1;
 			ctx.strokeStyle = '#000';
 			ctx.beginPath();
@@ -246,8 +241,7 @@ function drawTimeline() {
 				(canvas.width * (timelineBar.data.born - minYear)) /
 				(maxYear - minYear);
 			const width =
-				(canvas.width *
-					(timelineBar.data.died - timelineBar.data.born) -
+				(canvas.width * (timelineBar.data.died - timelineBar.data.born) -
 					minYear) /
 					(maxYear - minYear) +
 				4;
@@ -257,8 +251,7 @@ function drawTimeline() {
 			ctx.fillStyle = '#22f';
 			const x = canvas.width * timelineBar.pos - 4;
 			const y = canvas.height / 2 + yOffset;
-			const width =
-				(canvas.width * timelineBar.lifespan) / (maxYear - minYear);
+			const width = (canvas.width * timelineBar.lifespan) / (maxYear - minYear);
 			ctx.fillRect(x, y, width, 10);
 
 			const textX =
@@ -289,10 +282,7 @@ function setScore() {
 		// console.log(' timelineBar', timelineBar);
 		// console.log('set ', setBorn, setDied);
 		let overlap = 0;
-		if (
-			setBorn < timelineBar.data.died &&
-			setDied > timelineBar.data.born
-		) {
+		if (setBorn < timelineBar.data.died && setDied > timelineBar.data.born) {
 			if (setBorn < timelineBar.data.born) {
 				if (setDied > timelineBar.data.died) {
 					overlap =

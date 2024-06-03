@@ -151,6 +151,9 @@ function setData() {
 		// document.getElementById('data-image').src = `img/${selectedData.img}`;
 		document.getElementById('data-slider').value = defaultAge;
 		setAgeValue();
+		document.getElementById('data-progress').innerHTML = `${
+			timelineBars.length + 1
+		} / ${maxGameLength}`;
 		document.getElementById('data-name').firstChild.href =
 			selectedData.link ||
 			'https://en.wikipedia.org/wiki/' + selectedData.name.replace(/\s/g, '_');
@@ -194,7 +197,7 @@ function drawTimeline() {
 	ctx.lineTo(canvas.width, canvas.height / 2);
 	ctx.stroke();
 
-	ctx.font = '12px Lato';
+	ctx.font = '16px Lato';
 	for (let year = minYear; year <= maxYear; year += 20) {
 		let x = (canvas.width * (year - minYear)) / (maxYear - minYear);
 		ctx.lineWidth = 3;
@@ -225,15 +228,17 @@ function drawTimeline() {
 		}
 
 		if (year == minYear) {
-			x += 14;
+			x += 18;
 		} else if (year == maxYear) {
 			x -= 24;
 		}
+
+		const yOffset = (year / 20) % 2 == 0 ? 0 : 18;
 		ctx.fillStyle = '#fff';
-		ctx.fillRect(x - 14, canvas.height / 2 + 12, 30, 12);
+		ctx.fillRect(x - 20, canvas.height / 2 + 10 + yOffset, 30, 12);
 
 		ctx.fillStyle = '#000';
-		ctx.fillText(year, x - 14, canvas.height / 2 + 22);
+		ctx.fillText(year, x - 20, canvas.height / 2 + 22 + yOffset);
 	}
 
 	const yOffsets = [-16, 28];
@@ -245,7 +250,7 @@ function drawTimeline() {
 	for (const timelineBar of timelineBars) {
 		const yOffset = yOffsets[i++];
 		{
-			ctx.fillStyle = '#222';
+			ctx.fillStyle = '#99e3fc';
 			const x =
 				(canvas.width * (timelineBar.data.born - minYear)) /
 				(maxYear - minYear);
@@ -267,14 +272,16 @@ function drawTimeline() {
 				(canvas.width * (timelineBar.data.born - minYear)) /
 					(maxYear - minYear) -
 				4;
-			ctx.fillStyle = '#fff';
+			ctx.fillStyle = 'red';
 			ctx.font = '14px Lato';
 
 			// Use a span to render html entities
 			const textContainer = document.createElement('span');
 			textContainer.innerHTML = timelineBar.data.name;
 			ctx.fillText(
-				`${textContainer.textContent} (${timelineBar.data.born} - ${timelineBar.data.died})`,
+				`${textContainer.textContent} (${
+					timelineBar.data.died - timelineBar.data.born
+				} years)`,
 				textX + 4,
 				y + 10
 			);

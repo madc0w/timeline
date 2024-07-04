@@ -6,9 +6,21 @@ const data = [
 		category: 'scientists',
 	},
 	{
+		name: 'Dante Alighieri',
+		born: 1265,
+		died: 1321,
+		category: 'artists',
+	},
+	{
 		name: 'Leonhard Euler',
 		born: 1707,
 		died: 1783,
+		category: 'scientists',
+	},
+	{
+		name: 'Antoine Lavoisier',
+		born: 1743,
+		died: 1794,
 		category: 'scientists',
 	},
 	{
@@ -27,6 +39,12 @@ const data = [
 		name: 'Carl Sagan',
 		born: 1934,
 		died: 1996,
+		category: 'scientists',
+	},
+	{
+		name: 'James Watt',
+		born: 1736,
+		died: 1819,
 		category: 'scientists',
 	},
 	{
@@ -63,7 +81,7 @@ const data = [
 		name: 'Kurt G&ouml;del',
 		born: 1906,
 		died: 1978,
-		category: 'scientists',
+		category: 'philosophers',
 	},
 	{
 		name: 'Franz Kafka',
@@ -76,6 +94,18 @@ const data = [
 		born: 1897,
 		died: 1939,
 		category: 'explorers',
+	},
+	{
+		name: 'Elizabeth I of England',
+		born: 1533,
+		died: 1603,
+		category: 'politicians',
+	},
+	{
+		name: 'Elizabeth II of England',
+		born: 1926,
+		died: 2022,
+		category: 'politicians',
 	},
 	{
 		name: 'Charles Lindbergh',
@@ -111,6 +141,12 @@ const data = [
 		name: 'Cary Grant',
 		born: 1904,
 		died: 1986,
+		category: 'artists',
+	},
+	{
+		name: 'Grace Kelly',
+		born: 1929,
+		died: 1982,
 		category: 'artists',
 	},
 	{
@@ -210,6 +246,12 @@ const data = [
 		category: 'politicians',
 	},
 	{
+		name: 'Theodore Roosevelt',
+		born: 1858,
+		died: 1919,
+		category: 'politicians',
+	},
+	{
 		name: 'John F. Kennedy',
 		born: 1917,
 		died: 1963,
@@ -245,12 +287,12 @@ const data = [
 		died: 1955,
 		category: 'artists',
 	},
-	// {
-	// 	name: 'Voltaire (Fran&ccedil;ois-Marie Arouet)',
-	// 	born: 1694,
-	// 	died: 0,
-	// 	category: 'artists',
-	// },
+	{
+		name: 'Voltaire (Fran&ccedil;ois-Marie Arouet)',
+		born: 1694,
+		died: 1778,
+		category: 'artists',
+	},
 	{
 		name: 'Pierre-Auguste Renoir',
 		born: 1841,
@@ -372,6 +414,12 @@ const data = [
 		category: 'politicians',
 	},
 	{
+		name: 'Pol Pot',
+		born: 1925,
+		died: 1998,
+		category: 'politicians',
+	},
+	{
 		name: 'Hirohito (Emperor Sh&omacr;wa)',
 		born: 1901,
 		died: 1989,
@@ -444,6 +492,12 @@ const data = [
 		category: 'politicians',
 	},
 	{
+		name: 'St. Thomas Aquinas',
+		born: 1225,
+		died: 1274,
+		category: 'philosophers',
+	},
+	{
 		name: 'Georges Clemenceau',
 		born: 1841,
 		died: 1929,
@@ -454,6 +508,12 @@ const data = [
 		born: 1930,
 		died: 2012,
 		category: 'explorers',
+	},
+	{
+		name: 'Isaac Newton',
+		born: 1643,
+		died: 1727,
+		category: 'scientists',
 	},
 	{
 		name: 'Sir Ernest Henry Shackleton',
@@ -654,6 +714,18 @@ const data = [
 		category: 'philosophers',
 	},
 	{
+		name: 'Gottfried Wilhelm Leibniz',
+		born: 1646,
+		died: 1716,
+		category: 'philosophers',
+	},
+	{
+		name: 'Blaise Pascal',
+		born: 1623,
+		died: 1662,
+		category: 'philosophers',
+	},
+	{
 		name: 'David Hume',
 		born: 1711,
 		died: 1776,
@@ -669,6 +741,12 @@ const data = [
 		name: 'Jean-Jacques Rousseau',
 		born: 1712,
 		died: 1778,
+		category: 'philosophers',
+	},
+	{
+		name: 'Niccol&ograve; Machiavelli',
+		born: 1469,
+		died: 1527,
 		category: 'philosophers',
 	},
 	{
@@ -702,10 +780,40 @@ const data = [
 		category: 'philosophers',
 	},
 	{
+		name: 'Sim&oacute;n Bol&iacute;var',
+		born: 1783,
+		died: 1830,
+		category: 'politicians',
+	},
+	{
+		name: 'Edgar Allan Poe',
+		born: 1809,
+		died: 1849,
+		category: 'artists',
+	},
+	{
 		name: 'Michel Foucault',
 		born: 1926,
 		died: 1984,
 		category: 'philosophers',
+	},
+	{
+		name: 'Michelangelo',
+		born: 1475,
+		died: 1564,
+		category: 'artists',
+	},
+	{
+		name: 'Louis XIV of France',
+		born: 1643,
+		died: 1715,
+		category: 'politicians',
+	},
+	{
+		name: 'Amerigo Vespucci',
+		born: 1451,
+		died: 1512,
+		category: 'explorers',
 	},
 	{
 		name: 'Bertrand Russell',

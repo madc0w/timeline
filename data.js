@@ -744,6 +744,13 @@ const data = [
 		category: 'philosophers',
 	},
 	{
+		name: 'Maurice Ravel',
+		born: 1875,
+		died: 1937,
+		category: 'artists',
+	},
+
+	{
 		name: 'Niccol&ograve; Machiavelli',
 		born: 1469,
 		died: 1527,
@@ -754,6 +761,12 @@ const data = [
 		born: 1632,
 		died: 1677,
 		category: 'philosophers',
+	},
+	{
+		name: 'Johann Sebastian Bach',
+		born: 1685,
+		died: 1750,
+		category: 'artists',
 	},
 	{
 		name: 'Georg Wilhelm Friedrich Hegel',

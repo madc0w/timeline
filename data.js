@@ -150,6 +150,18 @@ const data = [
 		category: 'artists',
 	},
 	{
+		name: 'Johannes Kepler',
+		born: 1571,
+		died: 1630,
+		category: 'scientists',
+	},
+	{
+		name: 'Christiaan Huygens',
+		born: 1629,
+		died: 1695,
+		category: 'scientists',
+	},
+	{
 		name: 'Mahatma Gandhi',
 		born: 1869,
 		died: 1948,
@@ -474,6 +486,18 @@ const data = [
 		category: 'scientists',
 	},
 	{
+		name: 'Galileo Galilei',
+		born: 1564,
+		died: 1642,
+		category: 'scientists',
+	},
+	{
+		name: 'Nicolaus Copernicus',
+		born: 1473,
+		died: 1543,
+		category: 'scientists',
+	},
+	{
 		name: 'Gary Cooper',
 		born: 1901,
 		died: 1961,
@@ -690,6 +714,12 @@ const data = [
 		category: 'scientists',
 	},
 	{
+		name: 'Pierre-Simon Laplace',
+		born: 1749,
+		died: 1827,
+		category: 'scientists',
+	},
+	{
 		name: 'Immanuel Kant',
 		born: 1724,
 		died: 1804,
@@ -875,6 +905,12 @@ const data = [
 		born: 1913,
 		died: 1960,
 		category: 'philosophers',
+	},
+	{
+		name: 'Benito Mussolini',
+		born: 1883,
+		died: 1945,
+		category: 'politicians',
 	},
 	{
 		name: 'James Cook',
